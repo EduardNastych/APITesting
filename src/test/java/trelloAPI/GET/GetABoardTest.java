@@ -19,7 +19,7 @@ import static trelloAPI.Globals.board_name;
 public class GetABoardTest {
     public String BOARD_ID;
     @BeforeTest
-    public void createNewCard(){
+    public void createNewBoard(){
         CreateABoardTest createABoardTest = new CreateABoardTest();
         createABoardTest.createABoard();
         BOARD_ID = createABoardTest.ID_BOARD;
@@ -28,8 +28,6 @@ public class GetABoardTest {
     public void getABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
-                .body(board_name)
                 .when()
                 .get("/1/boards/{id}", BOARD_ID)
                 .then().log().all()
@@ -38,7 +36,7 @@ public class GetABoardTest {
         Assert.assertEquals(jsonResponse.get("name"), Globals.NAME);
     }
     @AfterTest
-    public void deleteCard(){
+    public void deleteBoard(){
         DeleteABoardTest deleteABoardTest = new DeleteABoardTest();
         deleteABoardTest.BOARD_ID = BOARD_ID;
         deleteABoardTest.deleteABoardTest();
