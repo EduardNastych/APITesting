@@ -11,17 +11,16 @@ import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
 
 import static io.restassured.RestAssured.given;
+import static trelloAPI.Globals.FIELD;
 
 public class GetAFieldOnABoardTest {
     public String BOARD_ID;
-    public String NAME;
 
     @BeforeTest
     public void createNewBoard(){
         CreateABoardTest createABoardTest = new CreateABoardTest();
         createABoardTest.createABoard();
         BOARD_ID = createABoardTest.ID_BOARD;
-        NAME = createABoardTest.NAME;
     }
     @Test
     public void getAFieldOnABoard() {
@@ -29,11 +28,11 @@ public class GetAFieldOnABoardTest {
         JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
                 .when()
-                .get("/1/boards/{id}", BOARD_ID)
+                .get("/1/boards/{id}/{field}",BOARD_ID, FIELD)
                 .then().log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME);
+        Assert.assertEquals(jsonResponse.get("_value"), Globals.NAME);
     }
     @AfterTest
     public void deleteBoard(){
