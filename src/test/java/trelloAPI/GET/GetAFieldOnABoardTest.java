@@ -1,6 +1,5 @@
-package trelloAPI.PUT;
+package trelloAPI.GET;
 
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -12,29 +11,29 @@ import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.board_name;
-import static trelloAPI.Globals.new_board_name;
 
-public class UpdateABoardTest {
+public class GetAFieldOnABoardTest {
     public String BOARD_ID;
+    public String NAME;
+
     @BeforeTest
     public void createNewBoard(){
         CreateABoardTest createABoardTest = new CreateABoardTest();
         createABoardTest.createABoard();
         BOARD_ID = createABoardTest.ID_BOARD;
+        NAME = createABoardTest.NAME;
     }
     @Test
-    public void updateABoard() {
+    public void getAFieldOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
-                .body(new_board_name)
+                .header("Accept", "application/json")
                 .when()
-                .put("/1/boards/{id}", BOARD_ID)
+                .get("/1/boards/{id}", BOARD_ID)
                 .then().log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("name"), Globals.NEW_NAME);
+        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME);
     }
     @AfterTest
     public void deleteBoard(){

@@ -14,7 +14,7 @@ public class DeleteABoardTest {
     public String BOARD_ID;
 
     @BeforeTest
-    public void createNewCard(){
+    public void createNewBoard(){
         CreateABoardTest createABoardTest = new CreateABoardTest();
         createABoardTest.createABoard();
         BOARD_ID = createABoardTest.ID_BOARD;
