@@ -9,6 +9,8 @@ public class Globals {
     public static String NAME = "Board";
     public static String NEW_NAME = "NewBoard";
     public static String NULL = null;
+    public static String EMPTY = "";
+
     public static String ORGANIZATION_ID = "63f6185daed8c6d83933a17a";
     public static String FIELD = "name";
 }
