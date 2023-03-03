@@ -35,7 +35,6 @@ public class UpdateShowSidebarMembersPrefOnABoardTest {
                 .extract().jsonPath();
 
         Assert.assertEquals(jsonResponse.get("showSidebarMembers"), false);
-
     }
     @AfterTest
     public void deleteBoard(){
