@@ -4,6 +4,7 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import trelloAPI.DELETE.DeleteABoardTest;
 import trelloAPI.Globals;
@@ -13,29 +14,33 @@ import static io.restassured.RestAssured.given;
 import static trelloAPI.Globals.BOARD_NAME;
 import static trelloAPI.Globals.LABEL_INFO;
 
-public class CreateABoardTest {
-    public String ID_BOARD;
-    public String NAME;
+public class CreateALabelOnABoardTest {
+    public String BOARD_ID;
+
+    @BeforeTest
+    public void createNewBoard(){
+        CreateABoardTest createABoardTest = new CreateABoardTest();
+        createABoardTest.createABoard();
+        BOARD_ID = createABoardTest.ID_BOARD;
+    }
     @Test
-    public void createABoard() {
+    public void createALAbelOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
-                .body(BOARD_NAME)
+                .body(LABEL_INFO)
                 .when()
-                .post("/1/boards/")
+                .post("/1/boards/{id}/labels", BOARD_ID)
                 .then().log().all()
                 .extract().jsonPath();
 
-        ID_BOARD = jsonResponse.get("id");
-        NAME = jsonResponse.get("name");
-        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME_OF_BOARD);
-        Assert.assertEquals(jsonResponse.get("idOrganization"), Globals.ORGANIZATION_ID);
+        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME_OF_LABEL);
+        Assert.assertEquals(jsonResponse.get("color"), Globals.COLOR_OF_LABEL);
     }
     @AfterTest
     public void deleteBoard(){
         DeleteABoardTest deleteABoardTest = new DeleteABoardTest();
-        deleteABoardTest.BOARD_ID = ID_BOARD;
+        deleteABoardTest.BOARD_ID = BOARD_ID;
         deleteABoardTest.deleteABoardTest();
     }
 }
