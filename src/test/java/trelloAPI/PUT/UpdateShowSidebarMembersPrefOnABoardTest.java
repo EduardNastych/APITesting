@@ -12,6 +12,7 @@ import trelloAPI.Specifications;
 
 import static io.restassured.RestAssured.given;
 import static trelloAPI.Globals.SIDEBAR_INFO;
+import static trelloAPI.Globals.SIDEBAR_MEMBERS_INFO;
 
 public class UpdateShowSidebarMembersPrefOnABoardTest {
     public String BOARD_ID;
@@ -26,14 +27,14 @@ public class UpdateShowSidebarMembersPrefOnABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
-                .body(SIDEBAR_INFO)
+                .body(SIDEBAR_MEMBERS_INFO)
         .when()
                 .put("/1/boards/{id}/myPrefs/showSidebarMembers", BOARD_ID)
         .then()
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("showSidebarMembers"), true);
+        Assert.assertEquals(jsonResponse.get("showSidebarMembers"), false);
 
     }
     @AfterTest

@@ -11,6 +11,7 @@ public class Globals {
     public static String MEMBER_INFO = "{\"type\": \"admin\"}";
     public static String EMAIL_INFO = "{\"value\": \"top\"}";
     public static String SIDEBAR_INFO = "{\"value\": \"true\"}";
+    public static String SIDEBAR_MEMBERS_INFO = "{\"value\": \"false\"}";
     public static String NEW_BOARD_NAME = "{\"name\":\"NewBoard\"}";
     public static String NAME_OF_BOARD = "Board";
     public static String NAME_OF_LABEL = "Label";
