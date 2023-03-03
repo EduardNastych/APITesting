@@ -23,7 +23,7 @@ public class GetBoardStarsOnABoardTest {
         BOARD_ID = createABoardTest.ID_BOARD;
     }
     @Test
-    public void getAFieldOnABoard() {
+    public void getBoardStarsOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
