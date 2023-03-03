@@ -25,11 +25,11 @@ public class GetBoardStarsOnABoardTest {
     @Test
     public void getBoardStarsOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        JsonPath jsonResponse = given()
+        given()
                 .header("Accept", "application/json")
-                .when()
+        .when()
                 .get("/1/boards/{id}/boardStars", BOARD_ID)
-                .then()
+        .then()
                 .body("size()", greaterThanOrEqualTo(0))
                 .log().all()
                 .extract().jsonPath();

@@ -28,9 +28,10 @@ public class UpdateABoardTest {
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
                 .body(NEW_BOARD_NAME)
-                .when()
+        .when()
                 .put("/1/boards/{id}", BOARD_ID)
-                .then().log().all()
+        .then()
+                .log().all()
                 .extract().jsonPath();
 
         Assert.assertEquals(jsonResponse.get("name"), Globals.NEW_NAME_OF_BOARD);

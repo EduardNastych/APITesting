@@ -29,9 +29,10 @@ public class CreateALabelOnABoardTest {
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
                 .body(LABEL_INFO)
-                .when()
+        .when()
                 .post("/1/boards/{id}/labels", BOARD_ID)
-                .then().log().all()
+        .then()
+                .log().all()
                 .extract().jsonPath();
 
         Assert.assertEquals(jsonResponse.get("name"), Globals.NAME_OF_LABEL);

@@ -22,9 +22,10 @@ public class CreateABoardTest {
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
                 .body(BOARD_NAME)
-                .when()
+        .when()
                 .post("/1/boards/")
-                .then().log().all()
+        .then()
+                .log().all()
                 .extract().jsonPath();
 
         ID_BOARD = jsonResponse.get("id");
