@@ -13,4 +13,6 @@ public class Globals {
 
     public static String ORGANIZATION_ID = "63f6185daed8c6d83933a17a";
     public static String FIELD = "name";
+    public static String FILTER = "all";
 }
+
