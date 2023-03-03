@@ -1,9 +1,7 @@
 package trelloAPI.GET;
 
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -14,7 +12,6 @@ import trelloAPI.Specifications;
 
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.board_name;
 
 public class GetABoardTest {
     public String BOARD_ID;
@@ -33,7 +30,7 @@ public class GetABoardTest {
                 .then().log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME);
+        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME_OF_BOARD);
     }
     @AfterTest
     public void deleteBoard(){

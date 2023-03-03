@@ -32,7 +32,7 @@ public class GetAFieldOnABoardTest {
                 .then().log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("_value"), Globals.NAME);
+        Assert.assertEquals(jsonResponse.get("_value"), Globals.NAME_OF_BOARD);
     }
     @AfterTest
     public void deleteBoard(){

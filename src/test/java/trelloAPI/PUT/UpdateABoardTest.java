@@ -12,8 +12,7 @@ import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.board_name;
-import static trelloAPI.Globals.new_board_name;
+import static trelloAPI.Globals.NEW_BOARD_NAME;
 
 public class UpdateABoardTest {
     public String BOARD_ID;
@@ -28,13 +27,13 @@ public class UpdateABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
-                .body(new_board_name)
+                .body(NEW_BOARD_NAME)
                 .when()
                 .put("/1/boards/{id}", BOARD_ID)
                 .then().log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("name"), Globals.NEW_NAME);
+        Assert.assertEquals(jsonResponse.get("name"), Globals.NEW_NAME_OF_BOARD);
     }
     @AfterTest
     public void deleteBoard(){
