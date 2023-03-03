@@ -25,9 +25,10 @@ public class GetABoardTest {
     public void getABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
-                .when()
+        .when()
                 .get("/1/boards/{id}", BOARD_ID)
-                .then().log().all()
+        .then()
+                .log().all()
                 .extract().jsonPath();
 
         Assert.assertEquals(jsonResponse.get("name"), Globals.NAME_OF_BOARD);

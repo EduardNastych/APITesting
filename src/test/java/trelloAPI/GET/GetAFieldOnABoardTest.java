@@ -27,9 +27,10 @@ public class GetAFieldOnABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
-                .when()
+        .when()
                 .get("/1/boards/{id}/{field}",BOARD_ID, FIELD)
-                .then().log().all()
+        .then()
+                .log().all()
                 .extract().jsonPath();
 
         Assert.assertEquals(jsonResponse.get("_value"), Globals.NAME_OF_BOARD);

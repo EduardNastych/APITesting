@@ -24,9 +24,10 @@ public class DeleteABoardTest {
         Specifications.installSpec(Specifications.requestSpec(),Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
-                .when()
+        .when()
                 .delete("/1/boards/{id}", BOARD_ID)
-                .then().log().all()
+        .then()
+                .log().all()
                 .extract().jsonPath();
 
         Assert.assertEquals(jsonResponse.get("_value"), Globals.NULL);

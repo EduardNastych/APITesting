@@ -12,32 +12,33 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static trelloAPI.Globals.FILTER;
 
-public class GetFilteredCardsOnABoardTest {
+public class GetFilteredListsOnABoardTest {
     public String BOARD_ID;
 
     @BeforeTest
-    public void createNewBoard(){
+    public void createNewBoard() {
         CreateABoardTest createABoardTest = new CreateABoardTest();
         createABoardTest.createABoard();
         BOARD_ID = createABoardTest.ID_BOARD;
     }
+
     @Test
-    public void getFilteredCardsOnABoard() {
+    public void getFilteredListsOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         given()
                 .header("Accept", "application/json")
         .when()
-                .get("/1/boards/{id}/cards/{filter}", BOARD_ID, FILTER)
+                .get("/1/boards/{id}/lists/{filter}", BOARD_ID, FILTER)
         .then()
                 .body("size()", greaterThanOrEqualTo(0))
                 .log().all()
                 .extract().jsonPath();
     }
+
     @AfterTest
-    public void deleteBoard(){
+    public void deleteBoard() {
         DeleteABoardTest deleteABoardTest = new DeleteABoardTest();
         deleteABoardTest.BOARD_ID = BOARD_ID;
         deleteABoardTest.deleteABoardTest();
     }
 }
-
