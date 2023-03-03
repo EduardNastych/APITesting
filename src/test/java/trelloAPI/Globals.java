@@ -9,6 +9,7 @@ public class Globals {
             "\"color\":\"blue\"\n" +
             "}";
     public static String MEMBER_INFO = "{\"type\": \"admin\"}";
+    public static String EMAIL_INFO = "{\"value\": \"top\"}";
     public static String NEW_BOARD_NAME = "{\"name\":\"NewBoard\"}";
     public static String NAME_OF_BOARD = "Board";
     public static String NAME_OF_LABEL = "Label";
@@ -16,10 +17,10 @@ public class Globals {
     public static String NEW_NAME_OF_BOARD = "NewBoard";
     public static String MEMBER_ID = "63f61858431aa377440c8a5b";
     public static String NULL = null;
-    public static String EMPTY = "";
-
     public static String ORGANIZATION_ID = "63f6185daed8c6d83933a17a";
     public static String FIELD = "name";
     public static String FILTER = "all";
+    public static String EMAIL_POSITION = "top";
+
 }
 

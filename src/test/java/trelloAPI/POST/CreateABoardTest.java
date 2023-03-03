@@ -11,7 +11,6 @@ import trelloAPI.Specifications;
 
 import static io.restassured.RestAssured.given;
 import static trelloAPI.Globals.BOARD_NAME;
-import static trelloAPI.Globals.LABEL_INFO;
 
 public class CreateABoardTest {
     public String ID_BOARD;

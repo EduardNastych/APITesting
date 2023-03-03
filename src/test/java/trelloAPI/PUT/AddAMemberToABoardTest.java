@@ -29,9 +29,9 @@ public class AddAMemberToABoardTest {
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
                 .body(MEMBER_INFO)
-                .when()
+        .when()
                 .put("/1/boards/{id}/members/{idMember}", BOARD_ID, Globals.MEMBER_ID)
-                .then()
+        .then()
                 .log().all()
                 .extract().jsonPath();
 
