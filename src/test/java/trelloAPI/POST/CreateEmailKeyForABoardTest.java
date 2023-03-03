@@ -1,20 +1,18 @@
-package trelloAPI.PUT;
+package trelloAPI.POST;
 
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import trelloAPI.DELETE.DeleteABoardTest;
-import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.SIDEBAR_MEMBER_INFO;
 
-public class UpdateShowSidebarMembersPrefOnABoardTest {
+public class CreateEmailKeyForABoardTest {
     public String BOARD_ID;
+
     @BeforeTest
     public void createNewBoard(){
         CreateABoardTest createABoardTest = new CreateABoardTest();
@@ -22,19 +20,17 @@ public class UpdateShowSidebarMembersPrefOnABoardTest {
         BOARD_ID = createABoardTest.ID_BOARD;
     }
     @Test
-    public void updateShowSidebarMembersPrefOnABoard() {
+    public void createEmailKeyForABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
-                .body(SIDEBAR_MEMBER_INFO)
+                .header("Accept", "application/json")
         .when()
-                .put("/1/boards/{id}/myPrefs/showSidebarMembers", BOARD_ID)
+                .post("/1/boards/{id}/emailKey/generate", BOARD_ID)
         .then()
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("showSidebarMembers"), false);
-
+        Assert.assertEquals(jsonResponse.get("id"), BOARD_ID);
     }
     @AfterTest
     public void deleteBoard(){
