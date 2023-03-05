@@ -1,31 +1,24 @@
 package trelloAPI.GET;
 
-
+import io.restassured.path.json.JsonPath;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
-import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
+import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static trelloAPI.Globals.BOARD_NAME;
 import static trelloAPI.Globals.FILTER;
 
 public class GetFilteredListsOnABoardTest {
     public String BOARD_ID;
-
-    @BeforeTest
-    public void createNewBoard() {
-        CreateABoardTest createABoardTest = new CreateABoardTest();
-        createABoardTest.createABoard();
-        BOARD_ID = createABoardTest.ID_BOARD;
-    }
-
     @Test
     public void getFilteredListsOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        given()
+        BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
+        JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
         .when()
                 .get("/1/boards/{id}/lists/{filter}", BOARD_ID, FILTER)
@@ -33,12 +26,13 @@ public class GetFilteredListsOnABoardTest {
                 .body("size()", greaterThanOrEqualTo(0))
                 .log().all()
                 .extract().jsonPath();
-    }
 
+        Assert.assertEquals(jsonResponse.get("[0].name"), "To Do");
+        Assert.assertEquals(jsonResponse.get("[1].name"), "Doing");
+        Assert.assertEquals(jsonResponse.get("[2].name"), "Done");
+    }
     @AfterTest
-    public void deleteBoard() {
-        DeleteABoardTest deleteABoardTest = new DeleteABoardTest();
-        deleteABoardTest.BOARD_ID = BOARD_ID;
-        deleteABoardTest.deleteABoardTest();
+    public void deleteBoard(){
+        TestRestClient.deleteBoard(BOARD_ID);
     }
 }

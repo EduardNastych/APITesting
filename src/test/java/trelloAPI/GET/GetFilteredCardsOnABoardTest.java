@@ -1,29 +1,23 @@
 package trelloAPI.GET;
 
+import io.restassured.path.json.JsonPath;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
-import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
+import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static trelloAPI.Globals.FILTER;
+import static trelloAPI.Globals.*;
 
 public class GetFilteredCardsOnABoardTest {
     public String BOARD_ID;
-
-    @BeforeTest
-    public void createNewBoard(){
-        CreateABoardTest createABoardTest = new CreateABoardTest();
-        createABoardTest.createABoard();
-        BOARD_ID = createABoardTest.ID_BOARD;
-    }
     @Test
     public void getFilteredCardsOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
-        given()
+        BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
+        JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
         .when()
                 .get("/1/boards/{id}/cards/{filter}", BOARD_ID, FILTER)
@@ -31,12 +25,12 @@ public class GetFilteredCardsOnABoardTest {
                 .body("size()", greaterThanOrEqualTo(0))
                 .log().all()
                 .extract().jsonPath();
+
+        Assert.assertEquals(jsonResponse.get().toString(), EMPTY);
     }
     @AfterTest
     public void deleteBoard(){
-        DeleteABoardTest deleteABoardTest = new DeleteABoardTest();
-        deleteABoardTest.BOARD_ID = BOARD_ID;
-        deleteABoardTest.deleteABoardTest();
+        TestRestClient.deleteBoard(BOARD_ID);
     }
 }
 

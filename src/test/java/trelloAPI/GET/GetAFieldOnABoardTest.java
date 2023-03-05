@@ -3,28 +3,19 @@ package trelloAPI.GET;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
-import trelloAPI.Globals;
-import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
+import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.FIELD;
+import static trelloAPI.Globals.*;
 
 public class GetAFieldOnABoardTest {
     public String BOARD_ID;
-
-    @BeforeTest
-    public void createNewBoard(){
-        CreateABoardTest createABoardTest = new CreateABoardTest();
-        createABoardTest.createABoard();
-        BOARD_ID = createABoardTest.ID_BOARD;
-    }
     @Test
     public void getAFieldOnABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
         .when()
@@ -33,12 +24,10 @@ public class GetAFieldOnABoardTest {
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("_value"), Globals.NAME_OF_BOARD);
+        Assert.assertEquals(jsonResponse.get("_value"), NAME_OF_BOARD);
     }
     @AfterTest
     public void deleteBoard(){
-        DeleteABoardTest deleteABoardTest = new DeleteABoardTest();
-        deleteABoardTest.BOARD_ID = BOARD_ID;
-        deleteABoardTest.deleteABoardTest();
+        TestRestClient.deleteBoard(BOARD_ID);
     }
 }
