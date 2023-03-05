@@ -5,7 +5,6 @@ import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 

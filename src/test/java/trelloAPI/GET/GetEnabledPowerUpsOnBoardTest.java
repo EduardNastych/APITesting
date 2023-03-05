@@ -24,7 +24,7 @@ public class GetEnabledPowerUpsOnBoardTest {
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("promotional"), true);
+        Assert.assertEquals(jsonResponse.get("[0].promotional"), true);
     }
     @AfterTest
     public void deleteBoard(){

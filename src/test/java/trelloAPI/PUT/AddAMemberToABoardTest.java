@@ -5,7 +5,6 @@ import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
 import trelloAPI.Globals;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
@@ -28,7 +27,7 @@ public class AddAMemberToABoardTest {
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("id"), BOARD_ID);
+        Assert.assertEquals(jsonResponse.get("members[0].fullName"), MEMBER_NAME);
 
     }
     @AfterTest

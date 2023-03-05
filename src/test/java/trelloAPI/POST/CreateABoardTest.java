@@ -5,13 +5,11 @@ import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
-import trelloAPI.Globals;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.BOARD_NAME;
+import static trelloAPI.Globals.*;
 
 public class CreateABoardTest {
     public String ID_BOARD;
@@ -30,8 +28,8 @@ public class CreateABoardTest {
 
         ID_BOARD = jsonResponse.get("id");
         NAME = jsonResponse.get("name");
-        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME_OF_BOARD);
-        Assert.assertEquals(jsonResponse.get("idOrganization"), Globals.ORGANIZATION_ID);
+        Assert.assertEquals(jsonResponse.get("name"), NAME_OF_BOARD);
+        Assert.assertEquals(jsonResponse.get("idOrganization"), ORGANIZATION_ID);
     }
     @AfterTest
     public void deleteBoard(){

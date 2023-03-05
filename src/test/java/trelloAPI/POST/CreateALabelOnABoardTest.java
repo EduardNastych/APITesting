@@ -5,14 +5,11 @@ import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
-import trelloAPI.Globals;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.BOARD_NAME;
-import static trelloAPI.Globals.LABEL_INFO;
+import static trelloAPI.Globals.*;
 
 public class CreateALabelOnABoardTest {
     public String BOARD_ID;
@@ -29,8 +26,8 @@ public class CreateALabelOnABoardTest {
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("name"), Globals.NAME_OF_LABEL);
-        Assert.assertEquals(jsonResponse.get("color"), Globals.COLOR_OF_LABEL);
+        Assert.assertEquals(jsonResponse.get("name"), NAME_OF_LABEL);
+        Assert.assertEquals(jsonResponse.get("color"), COLOR_OF_LABEL);
     }
     @AfterTest
     public void deleteBoard(){

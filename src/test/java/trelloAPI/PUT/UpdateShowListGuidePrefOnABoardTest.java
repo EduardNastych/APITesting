@@ -6,13 +6,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
 import static trelloAPI.Globals.BOARD_NAME;
-import static trelloAPI.Globals.List_Info;
+import static trelloAPI.Globals.LIST_INFO;
 
 public class UpdateShowListGuidePrefOnABoardTest {
     public String BOARD_ID;
@@ -32,7 +31,7 @@ public class UpdateShowListGuidePrefOnABoardTest {
         Specifications.installSpec(Specifications.requestSpec(),Specifications.responseSpecOK200());
         JsonPath jsonResponse= given()
                 .contentType(ContentType.JSON)
-                .body(List_Info)
+                .body(LIST_INFO)
                 .when()
                 .put("/1/boards/{Id}/myPrefs/showListGuide",BOARD_ID)
                 .then()
