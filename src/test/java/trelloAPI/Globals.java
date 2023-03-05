@@ -39,5 +39,6 @@ public class Globals {
     public static  String LIST_INFO ="{\"value\": \"true\"}";
     public static String SIDEBAR_BOARD_INFO ="{\"value\": \"true\"}";
     public static String LABEL_NAME = "";
+    public static String LABELS_NAME = "To Do";
 }
 
