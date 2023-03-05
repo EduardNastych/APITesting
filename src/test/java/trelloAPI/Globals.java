@@ -26,5 +26,6 @@ public class Globals {
     public static String FIELD = "name";
     public static String FILTER = "all";
     public static String EMAIL_POSITION = "top";
+    public static String MEMBER_TYPE = "admin";
 }
 
