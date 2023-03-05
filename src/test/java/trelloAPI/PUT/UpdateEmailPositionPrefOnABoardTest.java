@@ -5,14 +5,11 @@ import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import trelloAPI.DELETE.DeleteABoardTest;
-import trelloAPI.Globals;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.BOARD_NAME;
-import static trelloAPI.Globals.EMAIL_INFO;
+import static trelloAPI.Globals.*;
 
 public class UpdateEmailPositionPrefOnABoardTest {
     public String BOARD_ID;
@@ -22,14 +19,14 @@ public class UpdateEmailPositionPrefOnABoardTest {
         BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
-        .body(EMAIL_INFO)
-                .when()
+                .body(EMAIL_INFO)
+        .when()
                 .put("/1/boards/{id}/myPrefs/emailPosition", BOARD_ID)
         .then()
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("emailPosition"), Globals.EMAIL_POSITION);
+        Assert.assertEquals(jsonResponse.get("emailPosition"), EMAIL_POSITION);
 
     }
     @AfterTest

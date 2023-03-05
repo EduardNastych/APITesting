@@ -3,12 +3,12 @@ package trelloAPI.DELETE;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import trelloAPI.Globals;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
 import static trelloAPI.Globals.BOARD_NAME;
+import static trelloAPI.Globals.NULL;
 
 public class DeleteABoardTest {
     public String BOARD_ID;
@@ -24,7 +24,7 @@ public class DeleteABoardTest {
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("_value"), Globals.NULL);
+        Assert.assertEquals(jsonResponse.get("_value"), NULL);
     }
 }
 

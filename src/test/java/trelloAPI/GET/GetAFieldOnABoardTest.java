@@ -4,13 +4,11 @@ import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import trelloAPI.Globals;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.BOARD_NAME;
-import static trelloAPI.Globals.FIELD;
+import static trelloAPI.Globals.*;
 
 public class GetAFieldOnABoardTest {
     public String BOARD_ID;
@@ -26,7 +24,7 @@ public class GetAFieldOnABoardTest {
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("_value"), Globals.NAME_OF_BOARD);
+        Assert.assertEquals(jsonResponse.get("_value"), NAME_OF_BOARD);
     }
     @AfterTest
     public void deleteBoard(){
