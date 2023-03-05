@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import trelloAPI.DELETE.DeleteABoardTest;
 import trelloAPI.Globals;
 import trelloAPI.Specifications;
+import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
 import static trelloAPI.Globals.BOARD_NAME;
@@ -34,8 +35,6 @@ public class CreateABoardTest {
     }
     @AfterTest
     public void deleteBoard(){
-        DeleteABoardTest deleteABoardTest = new DeleteABoardTest();
-        deleteABoardTest.BOARD_ID = ID_BOARD;
-        deleteABoardTest.deleteABoardTest();
+        TestRestClient.deleteBoard(ID_BOARD);
     }
 }
