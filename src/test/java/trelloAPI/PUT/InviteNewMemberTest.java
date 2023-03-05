@@ -11,8 +11,7 @@ import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
-import static trelloAPI.Globals.BOARD_NAME;
-import static trelloAPI.Globals.newMemberEmail;
+import static trelloAPI.Globals.*;
 
 public class InviteNewMemberTest {
 
@@ -29,7 +28,7 @@ public class InviteNewMemberTest {
         JsonPath jsonResponse = given()
                 .contentType(ContentType.JSON)
                 .header("Accept", "application/json")
-                .queryParam("email", newMemberEmail)
+                .queryParam("email", NEW_MEMBER_EMAIL)
                 .when()
                 .put("/1/boards/" + BOARD_ID + "/members")
                 .then().log().all()
