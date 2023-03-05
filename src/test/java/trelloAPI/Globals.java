@@ -18,6 +18,7 @@ public class Globals {
     public static String NAME_OF_LABEL = "Label";
     public static String COLOR_OF_LABEL = "blue";
     public static String NEW_NAME_OF_BOARD = "NewBoard";
+
     public static String NAME_LIST = "First name for list";
     public static String MEMBER_ID = "63f61858431aa377440c8a5b";
     public static String NULL = null;

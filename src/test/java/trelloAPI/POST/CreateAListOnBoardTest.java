@@ -14,7 +14,6 @@ import static trelloAPI.Globals.LIST_NAME;
 public class CreateAListOnBoardTest {
     public String NAME_LIST;
     public String BOARD_ID;
-
    @Test
     public void createListOnBoard() {
        Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
@@ -30,7 +29,6 @@ public class CreateAListOnBoardTest {
 
        Assert.assertEquals(jsonResponse.get("name"), NAME_LIST);
    }
-
     @AfterTest
     public void deleteBoard(){
         TestRestClient.deleteBoard(BOARD_ID);
