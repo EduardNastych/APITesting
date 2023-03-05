@@ -35,5 +35,6 @@ public class Globals {
     public static String LIST_NAME = "{\"name\":\"First name for list\"}";
     public static  String LIST_INFO ="{\"value\": \"true\"}";
     public static String SIDEBAR_BOARD_INFO ="{\"value\": \"true\"}";
+    public static String LABEL_NAME = "";
 }
 
