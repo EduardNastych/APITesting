@@ -2,8 +2,10 @@ package trelloAPI.GET;
 
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
+import trelloAPI.Globals;
 import trelloAPI.Specifications;
 import trelloAPI.TestRestClient;
 
@@ -24,6 +26,8 @@ public class GetMembershipsOfABoardTest {
         .then()
                 .log().all()
                 .extract().jsonPath();
+
+        Assert.assertEquals(jsonResponse.get("[0].memberType"), Globals.MEMBER_TYPE);
     }
 
     @AfterTest
