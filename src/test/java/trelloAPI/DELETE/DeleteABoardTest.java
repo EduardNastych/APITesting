@@ -2,26 +2,20 @@ package trelloAPI.DELETE;
 
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import trelloAPI.Globals;
-import trelloAPI.POST.CreateABoardTest;
 import trelloAPI.Specifications;
+import trelloAPI.TestRestClient;
 
 import static io.restassured.RestAssured.given;
+import static trelloAPI.Globals.BOARD_NAME;
 
 public class DeleteABoardTest {
     public String BOARD_ID;
-
-    @BeforeTest
-    public void createNewBoard(){
-        CreateABoardTest createABoardTest = new CreateABoardTest();
-        createABoardTest.createABoard();
-        BOARD_ID = createABoardTest.ID_BOARD;
-    }
     @Test
     public void deleteABoardTest(){
         Specifications.installSpec(Specifications.requestSpec(),Specifications.responseSpecOK200());
+        BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
                 .header("Accept", "application/json")
         .when()

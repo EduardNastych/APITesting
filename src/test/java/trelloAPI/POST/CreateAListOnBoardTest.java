@@ -15,24 +15,25 @@ public class CreateAListOnBoardTest {
     public String NAME_LIST;
     public String BOARD_ID;
 
-   @Test
+    @Test
     public void createListOnBoard() {
-       Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
-       BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
-       JsonPath jsonResponse = given()
-               .contentType(ContentType.JSON)
-               .body(LIST_NAME)
-               .when()
-               .post("/1/boards/{id}/lists", BOARD_ID)
-               .then().log().all()
-               .extract().jsonPath();
-       NAME_LIST = jsonResponse.get("name");
+        Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
+        JsonPath jsonResponse = given()
+                .contentType(ContentType.JSON)
+                .body(LIST_NAME)
+                .when()
+                .post("/1/boards/{id}/lists", BOARD_ID)
+                .then().log().all()
+                .extract().jsonPath();
+        NAME_LIST = jsonResponse.get("name");
 
-       Assert.assertEquals(jsonResponse.get("name"), NAME_LIST);
-   }
+        Assert.assertEquals(jsonResponse.get("name"), NAME_LIST);
+    }
 
     @AfterTest
     public void deleteBoard(){
         TestRestClient.deleteBoard(BOARD_ID);
     }
 }
+
