@@ -27,5 +27,6 @@ public class Globals {
     public static String FILTER = "all";
     public static String EMAIL_POSITION = "top";
     public static String newMemberEmail = "kyrosaki1321@gmail.com";
+    public static  String List_Info="{\"value\": \"true\"}";
 }
 
