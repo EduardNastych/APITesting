@@ -28,5 +28,6 @@ public class Globals {
     public static String EMAIL_POSITION = "top";
     public static String newMemberEmail = "kyrosaki1321@gmail.com";
     public static  String List_Info="{\"value\": \"true\"}";
+    public static String Sidebar_Board_Info="{\"value\": \"true\"}";
 }
 
