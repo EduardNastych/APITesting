@@ -18,11 +18,14 @@ public class Globals {
     public static String FIELD = "name";
     public static String FILTER = "all";
     public static String EMAIL_POSITION = "top";
+
+    public static String MEMBER_TYPE = "admin";
+
     public static String POSITION_OF_EMAIL = "bottom";
     public static String NEW_MEMBER_EMAIL = "kyrosaki1321@gmail.com";
 
 
-    //JSON
+    
     public static String BOARD_NAME = "{\"name\":\"Board\"}";
     public static String LABEL_INFO = "{\"name\": \"Label\",\n" +
             "\"color\":\"blue\"\n" +
