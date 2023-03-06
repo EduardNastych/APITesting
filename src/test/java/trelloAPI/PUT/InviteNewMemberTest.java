@@ -30,7 +30,7 @@ public class InviteNewMemberTest {
                 .header("Accept", "application/json")
                 .queryParam("email", NEW_MEMBER_EMAIL)
                 .when()
-                .put("/1/boards/" + BOARD_ID + "/members")
+                .put("/1/boards/{id}/members",BOARD_ID)
                 .then().log().all()
                 .extract().jsonPath();
 
