@@ -18,7 +18,6 @@ public class UpdateABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
                 .body(NEW_BOARD_NAME)
         .when()
                 .put("/1/boards/{id}", BOARD_ID)

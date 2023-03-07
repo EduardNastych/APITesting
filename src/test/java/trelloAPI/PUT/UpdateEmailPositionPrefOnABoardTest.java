@@ -18,7 +18,6 @@ public class UpdateEmailPositionPrefOnABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
                 .body(EMAIL_INFO)
         .when()
                 .put("/1/boards/{id}/myPrefs/emailPosition", BOARD_ID)

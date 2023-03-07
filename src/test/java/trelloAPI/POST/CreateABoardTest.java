@@ -18,7 +18,6 @@ public class CreateABoardTest {
     public void createABoard() {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
                 .body(BOARD_NAME)
         .when()
                 .post("/1/boards/")

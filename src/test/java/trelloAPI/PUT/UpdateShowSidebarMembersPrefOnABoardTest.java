@@ -19,7 +19,6 @@ public class UpdateShowSidebarMembersPrefOnABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
                 .body(SIDEBAR_MEMBER_INFO)
         .when()
                 .put("/1/boards/{id}/myPrefs/showSidebarMembers", BOARD_ID)

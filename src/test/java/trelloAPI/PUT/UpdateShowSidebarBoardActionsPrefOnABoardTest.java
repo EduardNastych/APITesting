@@ -27,7 +27,6 @@ public class UpdateShowSidebarBoardActionsPrefOnABoardTest {
     public void updateShowSidebarBoard() {
         Specifications.installSpec(Specifications.requestSpec(),Specifications.responseSpecOK200());
         JsonPath jsonResponse= given()
-                .contentType(ContentType.JSON)
                 .body(SIDEBAR_BOARD_INFO)
                 .when()
                 .put("/1/boards/{Id}/myPrefs/showSidebarBoardActions",BOARD_ID)

@@ -19,7 +19,6 @@ public class AddAMemberToABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
                 .body(MEMBER_INFO)
         .when()
                 .put("/1/boards/{id}/members/{idMember}", BOARD_ID, Globals.MEMBER_ID)

@@ -18,7 +18,6 @@ public class CreateALabelOnABoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
                 .body(LABEL_INFO)
         .when()
                 .post("/1/boards/{id}/labels", BOARD_ID)

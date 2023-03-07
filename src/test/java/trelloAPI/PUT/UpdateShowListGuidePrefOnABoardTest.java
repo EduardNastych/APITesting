@@ -17,28 +17,21 @@ public class UpdateShowListGuidePrefOnABoardTest {
     public String BOARD_ID;
 
     @BeforeTest
-   public void createNewBoard() {
-
-           BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
-       }
-
-
-
+    public void createNewBoard() { BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id"); }
 
 
     @Test
     public void updateShowList() {
-        Specifications.installSpec(Specifications.requestSpec(),Specifications.responseSpecOK200());
-        JsonPath jsonResponse= given()
-                .contentType(ContentType.JSON)
+        Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
+        JsonPath jsonResponse = given()
                 .body(LIST_INFO)
                 .when()
-                .put("/1/boards/{Id}/myPrefs/showListGuide",BOARD_ID)
+                .put("/1/boards/{Id}/myPrefs/showListGuide", BOARD_ID)
                 .then()
                 .log().all()
                 .extract().jsonPath();
 
-        Assert.assertEquals(jsonResponse.get("showSidebarMembers"),true);
+        Assert.assertEquals(jsonResponse.get("showSidebarMembers"), true);
     }
 
 

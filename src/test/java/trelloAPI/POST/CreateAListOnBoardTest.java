@@ -20,7 +20,6 @@ public class CreateAListOnBoardTest {
         Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpecOK200());
         BOARD_ID = TestRestClient.createNewBoard(BOARD_NAME).get("id");
         JsonPath jsonResponse = given()
-                .contentType(ContentType.JSON)
                 .body(LIST_NAME)
                 .when()
                 .post("/1/boards/{id}/lists", BOARD_ID)
